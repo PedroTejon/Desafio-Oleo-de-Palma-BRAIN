@@ -1,4 +1,4 @@
-from pandas import read_csv, DataFrame, merge, concat
+from pandas import read_csv, merge, concat
 from os import listdir
 
 

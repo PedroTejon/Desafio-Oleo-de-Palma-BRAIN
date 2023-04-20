@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestRegressor
 from pandas import read_csv, to_datetime, concat, DataFrame
 from matplotlib.pyplot import subplots
-from seaborn import despine, displot, lineplot, set
+from seaborn import displot, lineplot, set
 set(style="whitegrid")
 
 
@@ -20,33 +20,23 @@ def main():
 
     dados_todos = concat([dados_teste, dados_treino])
 
-
     # Proporção de dados de produção
-    # displot(dados_todos.production, color='g', kind='kde').figure.savefig('graphs/distribution_production.png')
-
+    displot(dados_todos.production, color='g', kind='kde').figure.savefig('graphs/distribution_production.png')
 
     # Média de produção
-    # print(dados_todos.production.mean())
-
-
-    # Normalização conforme a média
-    # dados_todos = dados_todos[(dados_todos.production < (dados_todos.production.mean() +dados_todos.production.std()*4)) | (dados_todos.production.isna())]
-
+    print(dados_todos.production.mean())
 
     # Gráfico de produção conforme os anos
-    figura, eixos = subplots(figsize=(12, 10))
+    _, eixos = subplots(figsize=(12, 10))
     lineplot(x='date', y='production', data=dados_todos, ax=eixos).figure.savefig('graphs/production_by_year.png')
 
-
     # Gráfico de produção entre os meses
-    # figura, eixos = subplots(figsize=(12, 10))
-    # lineplot(x='month', y='production', data=dados_todos, ax=eixos).figure.savefig('graphs/production_by_month.png')
-
+    _, eixos = subplots(figsize=(12, 10))
+    lineplot(x='month', y='production', data=dados_todos, ax=eixos).figure.savefig('graphs/production_by_month.png')
 
     # Grafico de produção de acordo com a idade da árvore
-    # figura, eixos = subplots(figsize=(12, 10))
-    # lineplot(x='Precipitation', y='production', data=dados_todos, ax=eixos).figure.savefig('graphs/production_by_age.png')
-
+    _, eixos = subplots(figsize=(12, 10))
+    lineplot(x='age', y='production', data=dados_todos, ax=eixos).figure.savefig('graphs/production_by_age.png')
 
     # Verificar importância das colunas
     modelo = RandomForestRegressor()
